@@ -1,0 +1,50 @@
+#!/bin/bash
+# /**
+# *
+# *
+# **/
+
+source './tools/config/index.sh';
+
+echo $PWD;
+
+ACTION='';
+MIRROR_RELEASE='';
+
+for ARGV in "$@"
+    do
+        case $ARGV in
+            'create-mirror')
+                ACTION='create-mirror';
+            ;;
+            'import-gpg-keys')
+                ACTION='import-gpg-keys';
+            ;;
+            'node'|'nodejs')
+                MIRROR_RELEASE='node';
+            ;;
+            'io'|'iojs')
+                MIRROR_RELEASE='io';
+            ;;
+        esac
+done
+
+source './tools/util/index.sh';
+
+case $ACTION in
+    'create-mirror')
+		echo "[INFO] Try to create $MIRROR_RELEASE.js mirror";
+		[ -s "${PWD}/tools/create-mirror/${MIRROR_RELEASE}/index.sh" ] && . "${PWD}/tools/create-mirror/${MIRROR_RELEASE}/index.sh" && exit 0;
+        echo "[ERROR] Not support create \`${MIRROR_RELEASE}\` mirror yet.";
+        exit 1;
+    ;;
+    'import-gpg-keys')
+		echo "[INFO] Try to import GPG keys";
+		[ -s "${PWD}/tools/import-gpg-keys/init.sh" ] && . "${PWD}/tools/import-gpg-keys/init.sh" && exit 0;
+        echo "[ERROR] Import GPG keys errors.";
+        exit 1;
+    ;;
+    *)
+        echo 'useage: ./jsbrick.sh CMD NODE_RELEASE --argv1 --argv2';
+        exit 2;
+esac

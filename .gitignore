@@ -39,3 +39,5 @@ node_modules
 #MacOSX
 .DS_Store
 
+# mirror synced
+dist/*/*
