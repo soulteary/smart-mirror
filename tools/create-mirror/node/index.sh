@@ -69,19 +69,60 @@ CURRENT_VERSION="${BASE_DIR}/${VERSION}";
         #done
 
         #todo async download queue
-        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}.tar.gz" "node-v${VERSION}.tar.gz" "${CURRENT_VERSION}"
-        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-darwin-x64.tar.gz" "node-v${VERSION}-darwin-x64.tar.gz" "${CURRENT_VERSION}"
-        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x86.tar.gz" "node-v${VERSION}-linux-x86.tar.gz" "${CURRENT_VERSION}"
-        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x64.tar.gz" "node-v${VERSION}-linux-x64.tar.gz" "${CURRENT_VERSION}"
+        if [[ -n $DOWNLOAD_VERSION_FOR_MAC ]]; then
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-darwin-x64.tar.gz" "node-v${VERSION}-darwin-x64.tar.gz" "${CURRENT_VERSION}"
+        fi
 
-# if [ "$(nvm_download -L -s -I "$NVM_NODEJS_ORG_MIRROR/$VERSION/node-$VERSION.tar.gz" -o - 2>&1 | command grep '200 OK')" != '' ]; then
-#    tarball="$NVM_NODEJS_ORG_MIRROR/$VERSION/node-$VERSION.tar.gz"
-#    sum=$(nvm_download -L -s "$NVM_NODEJS_ORG_MIRROR/$VERSION/SHASUMS.txt" -o - | command grep "node-${VERSION}.tar.gz" | command awk '{print $1}')
-#  elif [ "$(nvm_download -L -s -I "$NVM_NODEJS_ORG_MIRROR/node-$VERSION.tar.gz" -o - | command grep '200 OK')" != '' ]; then
-#    tarball="$NVM_NODEJS_ORG_MIRROR/node-$VERSION.tar.gz"
-#  fi
+        if [[ -n $DOWNLOAD_VERSION_FOR_ARM ]]; then
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-arm64.tar.gz" "node-v${VERSION}-arm64.tar.gz" "${CURRENT_VERSION}"
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-armv6l.tar.gz" "node-v${VERSION}-armv6l.tar.gz" "${CURRENT_VERSION}"
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-armv7l.tar.gz" "node-v${VERSION}-armv7l.tar.gz" "${CURRENT_VERSION}"
+        else
+            if [[ -n $DOWNLOAD_VERSION_FOR_ARM_64 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-arm64.tar.gz" "node-v${VERSION}-arm64.tar.gz" "${CURRENT_VERSION}"
+            fi
+
+            if [[ -n $DOWNLOAD_VERSION_FOR_ARM_v6 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-armv6l.tar.gz" "node-v${VERSION}-armv6l.tar.gz" "${CURRENT_VERSION}"
+            fi
+
+            if [[ -n $DOWNLOAD_VERSION_FOR_ARM_v7 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-armv7l.tar.gz" "node-v${VERSION}-armv7l.tar.gz" "${CURRENT_VERSION}"
+            fi
+        fi
 
 
+        if [[ -n DOWNLOAD_VERSION_FOR_SUNOS ]]; then
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-sunos-x86.tar.gz" "node-v${VERSION}-linux-x86.tar.gz" "${CURRENT_VERSION}"
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-sunos-x64.tar.gz" "node-v${VERSION}-linux-x64.tar.gz" "${CURRENT_VERSION}"
+        else
+            if [[ -n $DOWNLOAD_VERSION_FOR_SUNOS_86 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-sunos-x86.tar.gz" "node-v${VERSION}-linux-x86.tar.gz" "${CURRENT_VERSION}"
+            fi
+
+            if [[ -n $DOWNLOAD_VERSION_FOR_SUNOS_64 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-sunos-x64.tar.gz" "node-v${VERSION}-linux-x64.tar.gz" "${CURRENT_VERSION}"
+            fi
+        fi
+
+
+        if [[ -n DOWNLOAD_VERSION_FOR_LINUX ]]; then
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-headers.tar.gz" "node-v${VERSION}-headers.tar.gz" "${CURRENT_VERSION}"
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x86.tar.gz" "node-v${VERSION}-linux-x86.tar.gz" "${CURRENT_VERSION}"
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x64.tar.gz" "node-v${VERSION}-linux-x64.tar.gz" "${CURRENT_VERSION}"
+        else
+            if [[ -n $DOWNLOAD_VERSION_FOR_LINUX_86 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x86.tar.gz" "node-v${VERSION}-linux-x86.tar.gz" "${CURRENT_VERSION}"
+            fi
+
+            if [[ -n $DOWNLOAD_VERSION_FOR_LINUX_64 ]]; then
+                lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x64.tar.gz" "node-v${VERSION}-linux-x64.tar.gz" "${CURRENT_VERSION}"
+            fi
+        fi
+
+        if [[ -n $DOWNLOAD_VERSION_FOR_SOURCE ]]; then
+            lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}.tar.gz" "node-v${VERSION}.tar.gz" "${CURRENT_VERSION}"
+        fi
     popd;
 done
 
