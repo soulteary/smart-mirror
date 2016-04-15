@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# /**
+# * Smart Mirror
+# *
+# * @author soulteary@gmail.com
+# * @desc   create Node.js mirror.
+# **/
+
 BASE_DIR="${PWD}/dist/${MIRROR_RELEASE}";
 mkdir -p "$BASE_DIR";
 

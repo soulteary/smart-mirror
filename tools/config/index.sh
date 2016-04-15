@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# /**
+# * Smart Mirror
+# *
+# * @author soulteary@gmail.com
+# * @desc   config, global vars.
+# **/
+
 PROTO_PREFIX='s';
 
 for ARGV in "$@"

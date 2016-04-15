@@ -1,7 +1,10 @@
 #!/bin/bash
+
 # /**
+# * Smart Mirror
 # *
-# *
+# * @author soulteary@gmail.com
+# * @desc   entry
 # **/
 
 source './tools/config/index.sh';
