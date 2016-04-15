@@ -53,9 +53,8 @@ CURRENT_VERSION="${BASE_DIR}/${VERSION}";
 
         wget -N "$SHASUMURL"
         wget -N "$SHASUMURL.asc"
-        wget -N "$SHASUMURL.gpg"
 
-        echo $(cat "$SHASUMFILE" | grep -E ".{64}\s+node-v${VERSION}.(tar.gz)")>"new-hash";
+        echo $(cat "$SHASUMFILE" | grep -E ".{64}\s+node-v${VERSION}.(tar.gz)")>"SHASUM256.txt.filter";
 
         $SHASUM -a256 -c "$SHASUMFILE" 2>/dev/null | grep "OK" | cut -d':' -f1 | while read line; do
             echo "${line},######";
