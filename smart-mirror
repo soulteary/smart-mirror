@@ -45,6 +45,6 @@ case $ACTION in
         exit 1;
     ;;
     *)
-        echo "Usage: ${0} Command MirrorType --argument1 --argument2 ... --argumentN";
+        echo -ne "Usage: \n\t${0} Command MirrorType --argument1 --argument2 ... --argumentN\n\n";
         exit 2;
 esac
