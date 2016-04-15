@@ -56,6 +56,8 @@ CURRENT_VERSION="${BASE_DIR}/${VERSION}";
 
         echo $(cat "$SHASUMFILE" | grep -E ".{64}\s+node-v${VERSION}.(tar.gz)")>"SHASUM256.txt.filter";
 
+
+
         $SHASUM -c "$SHASUMFILE" 2>/dev/null | grep "OK" | cut -d':' -f1 | while read line; do
             echo "${line},######";
             mkdir -p $(dirname "$line")
@@ -68,6 +70,18 @@ CURRENT_VERSION="${BASE_DIR}/${VERSION}";
 
         #todo async download queue
         lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}.tar.gz" "node-v${VERSION}.tar.gz" "${CURRENT_VERSION}"
+        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-darwin-x64.tar.gz" "node-v${VERSION}-darwin-x64.tar.gz" "${CURRENT_VERSION}"
+        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x86.tar.gz" "node-v${VERSION}-linux-x86.tar.gz" "${CURRENT_VERSION}"
+        lazy_download "${BASE_DIST_URL_NODEJS}/v${VERSION}/node-v${VERSION}-linux-x64.tar.gz" "node-v${VERSION}-linux-x64.tar.gz" "${CURRENT_VERSION}"
+
+# if [ "$(nvm_download -L -s -I "$NVM_NODEJS_ORG_MIRROR/$VERSION/node-$VERSION.tar.gz" -o - 2>&1 | command grep '200 OK')" != '' ]; then
+#    tarball="$NVM_NODEJS_ORG_MIRROR/$VERSION/node-$VERSION.tar.gz"
+#    sum=$(nvm_download -L -s "$NVM_NODEJS_ORG_MIRROR/$VERSION/SHASUMS.txt" -o - | command grep "node-${VERSION}.tar.gz" | command awk '{print $1}')
+#  elif [ "$(nvm_download -L -s -I "$NVM_NODEJS_ORG_MIRROR/node-$VERSION.tar.gz" -o - | command grep '200 OK')" != '' ]; then
+#    tarball="$NVM_NODEJS_ORG_MIRROR/node-$VERSION.tar.gz"
+#  fi
+
+
     popd;
 done
 

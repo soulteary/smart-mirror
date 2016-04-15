@@ -60,6 +60,13 @@ bash ./smart-mirror create-mirror io
     bash ./smart-mirror create-mirror node --without-0.x
     ```
 
+- 不使用SSL进行下载。
+
+    ```
+    bash ./smart-mirror create-mirror node --without-ssl
+    ```
+
+
 
 ### 支持的版本过滤参数
 
