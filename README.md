@@ -1,10 +1,8 @@
-[ENGLISH VERSION](./doc/#readme-en.md)
-
 # Smart Mirror
 
 ![I'm a Mirror!](./assets/mirror.png)
 
-搭建私有镜像，确保开发和发布环境的依赖稳定，推荐中国地区用户使用，大幅节约网络传输时间。
+搭建私有镜像，确保开发和发布环境的依赖稳定，推荐中国地区用户使用，大幅节约网络传输时间。[ENGLISH VERSION](./doc/readme-en.md)
 
 # 快速开始
 
