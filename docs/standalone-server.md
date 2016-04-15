@@ -20,7 +20,7 @@ git clone https://github.com/soulteary/smart-mirror.git
 进入目录，执行脚本即可。
 
 ```
-cd smart-mirror
+cd smart-mirror/
 bash ./smart-mirror
 ```
 

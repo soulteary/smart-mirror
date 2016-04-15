@@ -45,6 +45,6 @@ case $ACTION in
         exit 1;
     ;;
     *)
-        echo 'useage: ./jsbrick.sh CMD NODE_RELEASE --argv1 --argv2';
+        echo "Usage: ${0} Command MirrorType --argument1 --argument2 ... --argumentN";
         exit 2;
 esac
