@@ -47,8 +47,8 @@ CURRENT_VERSION="${BASE_DIR}/${VERSION}";
         SHASUMFILE_ASC="SHASUMS256.txt.asc"
 
         SHASUM=;
-        if check_exist "shasum"; then
-            SHASUM=shasum
+        if check_exist "sha256sum"; then
+            SHASUM=sha256sum
         fi
 
         wget -N "$SHASUMURL"
@@ -56,7 +56,7 @@ CURRENT_VERSION="${BASE_DIR}/${VERSION}";
 
         echo $(cat "$SHASUMFILE" | grep -E ".{64}\s+node-v${VERSION}.(tar.gz)")>"SHASUM256.txt.filter";
 
-        $SHASUM -a256 -c "$SHASUMFILE" 2>/dev/null | grep "OK" | cut -d':' -f1 | while read line; do
+        $SHASUM -c "$SHASUMFILE" 2>/dev/null | grep "OK" | cut -d':' -f1 | while read line; do
             echo "${line},######";
             mkdir -p $(dirname "$line")
             wget -O "$line" "$BASEURL/$line"
