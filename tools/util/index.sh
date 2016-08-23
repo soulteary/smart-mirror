@@ -22,6 +22,9 @@ if [[ "$MIRROR_RELEASE"="node" ]]; then
     WITHOUT_5_x='';
     WITHOUT_GT_5_x='';
 
+    WITHOUT_6_x='';
+    WITHOUT_GT_6_x='';
+
     for ARGV in "$@"
         do
             case $ARGV in
@@ -79,6 +82,16 @@ if [[ "$MIRROR_RELEASE"="node" ]]; then
                     WITHOUT_GT_5_x='1';
                     WITH_ALL_DIST='';
                 ;;
+
+                '--without-6.x')
+                    WITHOUT_6_x='1';
+                    WITH_ALL_DIST='';
+                ;;
+                '--without-gt-6.x')
+                    WITHOUT_GT_6_x='1';
+                    WITH_ALL_DIST='';
+                ;;
+
             esac
     done
 fi;
@@ -136,6 +149,10 @@ check_node_version() {
             return 1;
         fi;
 
+        if [[ -n $WITHOUT_GT_6_x ]]; then
+            return 1;
+        fi;
+
         if [[ -n $WITHOUT_GT_0_10 ]]; then
             if [[ "10" -gt "$b" ]]; then
                 return 1;
@@ -189,6 +206,10 @@ check_node_version() {
     fi
 
     if [[ "4" = "$a" ]]; then
+        if [[ -n $WITHOUT_GT_6_x ]]; then
+            return 1;
+        fi;
+
         if [[ -n $WITHOUT_GT_5_x ]]; then
             return 1;
         fi;
@@ -199,10 +220,22 @@ check_node_version() {
     fi
 
     if [[ "5" = "$a" ]]; then
+        if [[ -n $WITHOUT_GT_6_x ]]; then
+            return 1;
+        fi;
+
         if [[ -n $WITHOUT_5_x ]]; then
             return 1;
         fi;
     fi
+
+    if [[ "6" = "$a" ]]; then
+        if [[ -n $WITHOUT_6_x ]]; then
+            return 1;
+        fi;
+    fi
+
+
 
   return 0;
 }

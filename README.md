@@ -92,6 +92,9 @@ bash ./smart-mirror create-mirror io
 # sync without 5.x version
 --without-5.x
 
+# sync without 6.x version
+--without-6.x
+
 
 # sync without version < 0.12.10
 --without-gt-0.12.10
@@ -110,5 +113,8 @@ bash ./smart-mirror create-mirror io
 
 # sync without version < 5.x
 --without-gt-5.x
+
+# sync without version < 6.x
+--without-gt-6.x
 
 ```
