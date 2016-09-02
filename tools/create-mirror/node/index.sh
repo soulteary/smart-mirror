@@ -37,7 +37,7 @@ echo "[INFO] Get filtered version: $VERSION_COUNT";
 
 echo -ne "${VERSION_LIST}" | while read VERSION; do
 
-CURRENT_VERSION="${BASE_DIR}/${VERSION}";
+CURRENT_VERSION="${BASE_DIR}/v${VERSION}";
 
     mkdir -p "${CURRENT_VERSION}";
     pushd "${CURRENT_VERSION}";
