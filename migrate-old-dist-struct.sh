@@ -2,7 +2,9 @@
 
 for dirName in `ls`;
   do
-    matched=$(echo $dirName|egrep '^(\d+)(\.(\d+))+$');
+    #for mac
+    #matched=$(echo $dirName|egrep '^(\d+)(\.(\d+))+$');
+    matched=$(echo $dirName|grep -P '^(\d+)(\.(\d+))+$');
     if [ $matched ]; then
         mv $matched `echo $matched | sed 's/^/v/'`;
     fi
